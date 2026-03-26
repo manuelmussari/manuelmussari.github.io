@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manuel Mussari | Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+
+    body {
+      background:#0a0a0a;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    header {
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    h1 {
+      font-size:4rem;
+      letter-spacing:-2px;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    header p {
+      margin-top:15px;
+      opacity:0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay:0.5s;
+    }
+
+    .scroll {
+      position:absolute;
+      bottom:30px;
+      font-size:0.8rem;
+      opacity:0.5;
+      animation: bounce 2s infinite;
+    }
+
+    .projects {
+      padding:100px 40px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .card {
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(15px);
+      border:1px solid rgba(255,255,255,0.1);
+      padding:25px;
+      border-radius:20px;
+      transition:0.4s;
+      opacity:0;
+      transform:translateY(60px);
+    }
+
+    .card.visible {
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .card:hover {
+      transform:translateY(-10px) scale(1.03);
+    }
+
+    .card img {
+      width:100%;
+      border-radius:12px;
+      margin-bottom:15px;
+    }
+
+    footer {
+      text-align:center;
+      padding:40px;
+      opacity:0.6;
+    }
+
+    /* Animazioni */
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(20px);} 
+      to {opacity:1; transform:translateY(0);} 
+    }
+
+    @keyframes bounce {
+      0%,100%{transform:translateY(0);} 
+      50%{transform:translateY(-10px);} 
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Manuel Mussari</h1>
+  <p>Photographer • Designer • VideoMaker</p>
+  <div class="scroll">scroll ↓</div>
+</header>
+
+<section class="projects">
+  <div class="card">
+    <img src="https://picsum.photos/400/300?1">
+    <h2>Progetto 1</h2>
+    <p>Descrizione del progetto</p>
+  </div>
+
+  <div class="card">
+    <img src="https://picsum.photos/400/300?2">
+    <h2>Progetto 2</h2>
+    <p>Descrizione del progetto</p>
+  </div>
+
+  <div class="card">
+    <img src="https://picsum.photos/400/300?3">
+    <h2>Progetto 3</h2>
+    <p>Descrizione del progetto</p>
+  </div>
+</section>
+
+<footer>
+  <p>Contattami: manuelmussari@gmail.com</p>
+</footer>
+
+<script>
+  // Animazione scroll reveal
+  const cards = document.querySelectorAll('.card');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {threshold: 0.2});
+
+  cards.forEach(card => observer.observe(card));
+</script>
+
+</body>
+</html>
