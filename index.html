@@ -9,92 +9,40 @@
 
   <style>
     * {margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;scroll-behavior:smooth;}
-
-    body {background:#0a0a0a;color:white;}
+    body {background:#0a0a0a;color:white;overflow-x:hidden;}
 
     nav {
-      position:fixed;
-      top:0;
-      width:100%;
-      display:flex;
-      justify-content:center;
-      gap:30px;
-      padding:20px;
-      background:rgba(0,0,0,0.6);
-      backdrop-filter:blur(10px);
-      z-index:1000;
+      position:fixed;top:0;width:100%;display:flex;justify-content:center;gap:30px;padding:20px;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);z-index:1000;
     }
-
-    nav a {
-      color:white;
-      text-decoration:none;
-      font-size:0.9rem;
-      opacity:0.7;
-    }
-
+    nav a {color:white;text-decoration:none;font-size:0.9rem;opacity:0.7;transition:0.3s;}
     nav a:hover {opacity:1;}
 
-    section {
-      padding:100px 40px;
-    }
-
-    header {
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-    }
-
+    header {height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
     h1 {font-size:4rem;animation:fadeIn 1.5s ease forwards;}
-
     header p {margin-top:15px;opacity:0;animation:fadeIn 2s forwards 0.5s;}
 
-    .gallery {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:15px;
-    }
+    .gallery {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;}
+    .gallery img {width:100%;height:300px;object-fit:cover;border-radius:15px;transition:0.4s;cursor:pointer;}
+    .gallery img:hover {transform:scale(1.1);filter:brightness(1.2);}
 
-    .gallery img {
-      width:100%;
-      height:300px;
-      object-fit:cover;
-      border-radius:15px;
-      transition:0.4s;
-    }
+    .projects {display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:40px;}
+    .card {background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.1);
+      padding:25px;border-radius:20px;opacity:0;transform:translateY(60px);transition:0.6s;}
+    .card.visible {opacity:1;transform:translateY(0);}
+    .card:hover {transform:translateY(-10px) scale(1.03);}
 
-    .gallery img:hover {
-      transform:scale(1.05);
-      filter:brightness(1.2);
-    }
-
-    .projects {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:30px;
-    }
-
-    .card {
-      background:rgba(255,255,255,0.05);
-      backdrop-filter:blur(15px);
-      border:1px solid rgba(255,255,255,0.1);
-      padding:25px;
-      border-radius:20px;
-      opacity:0;
-      transform:translateY(60px);
-      transition:0.6s;
-    }
-
-    .card.visible {opacity:1;transform:translateY(0);}    
-
+    section {padding:100px 40px;}
+    h2 {text-align:center;margin-bottom:40px;}
     footer {text-align:center;padding:40px;opacity:0.6;}
 
-    @keyframes fadeIn {
-      from {opacity:0; transform:translateY(20px);} 
-      to {opacity:1; transform:translateY(0);} 
-    }
+    /* Modal Gallery */
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);
+      justify-content:center;align-items:center;z-index:2000;}
+    .modal img {max-width:90%;max-height:90%;border-radius:15px;}
+    .modal:target {display:flex;}
+
+    @keyframes fadeIn {from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);}}
   </style>
 </head>
 
@@ -113,26 +61,31 @@
 </header>
 
 <section id="foto">
-  <h2 style="text-align:center;margin-bottom:40px;">Gallery</h2>
+  <h2>Gallery Fotografica</h2>
   <div class="gallery">
-    <img src="https://picsum.photos/400/600?1">
-    <img src="https://picsum.photos/400/600?2">
-    <img src="https://picsum.photos/400/600?3">
-    <img src="https://picsum.photos/400/600?4">
+    <a href="#img1"><img src="https://picsum.photos/400/600?1"></a>
+    <a href="#img2"><img src="https://picsum.photos/400/600?2"></a>
+    <a href="#img3"><img src="https://picsum.photos/400/600?3"></a>
+    <a href="#img4"><img src="https://picsum.photos/400/600?4"></a>
   </div>
+  
+  <div id="img1" class="modal"><a href="#foto"><img src="https://picsum.photos/400/600?1"></a></div>
+  <div id="img2" class="modal"><a href="#foto"><img src="https://picsum.photos/400/600?2"></a></div>
+  <div id="img3" class="modal"><a href="#foto"><img src="https://picsum.photos/400/600?3"></a></div>
+  <div id="img4" class="modal"><a href="#foto"><img src="https://picsum.photos/400/600?4"></a></div>
 </section>
 
 <section id="progetti">
-  <h2 style="text-align:center;margin-bottom:40px;">Progetti</h2>
+  <h2>Progetti</h2>
   <div class="projects">
-    <div class="card"><h3>Progetto 1</h3><p>Descrizione</p></div>
-    <div class="card"><h3>Progetto 2</h3><p>Descrizione</p></div>
-    <div class="card"><h3>Progetto 3</h3><p>Descrizione</p></div>
+    <div class="card"><h3>Progetto 1</h3><p>Descrizione del progetto 1</p></div>
+    <div class="card"><h3>Progetto 2</h3><p>Descrizione del progetto 2</p></div>
+    <div class="card"><h3>Progetto 3</h3><p>Descrizione del progetto 3</p></div>
   </div>
 </section>
 
 <section id="contatti">
-  <h2 style="text-align:center;margin-bottom:20px;">Contatti</h2>
+  <h2>Contatti</h2>
   <p style="text-align:center;">manuelmussari@gmail.com</p>
 </section>
 
@@ -141,12 +94,11 @@
 </footer>
 
 <script>
+  // Scroll reveal animazioni
   const cards = document.querySelectorAll('.card');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      }
+      if(entry.isIntersecting){ entry.target.classList.add('visible'); }
     });
   });
   cards.forEach(card => observer.observe(card));
